@@ -1,5 +1,5 @@
-x = int(input('enter integer x: '))
-y = int(input('enter integer y: '))
+x = int(input('nhap so nguyen x: '))
+y = int(input('nhap so nguyen y: '))
 
 def minStep(x,y):
     step = 0
@@ -19,7 +19,9 @@ def minStep(x,y):
             x = x*2
             string = string + "*" 
         step = step + 1 
-        print(x)
+        #print(x)
         if x == y:
-            return step,string
-print(minStep(x,y))
+            break;
+    return step,string        
+step,opera = minStep(x,y)
+print("so buoc nho nhat:", step, "\n phep toan can thuc hien: ", opera)
