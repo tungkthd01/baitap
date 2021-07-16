@@ -2,6 +2,8 @@ from pyquery import PyQuery
 import requests
 from selenium import webdriver
 import time
+from bs4 import BeautifulSoup
+
 def byRequest():
     session = requests.session()
 
@@ -13,14 +15,16 @@ def byRequest():
         }
     #r = requests.post(url,data = payload)
     r = session.post('http://45.79.43.178/source_carts/wordpress/wp-login.php', data=payload)
-    #print(r.text)
-    x = session.cookies.get_dict()
-    print(x)
-    k = "wordpress_logged_in"
-    for i in x.keys():
-        if i.find(k) >= 0:
-            y = x[i].split("%")[0]
-    print(y)
+    SteamStatus =  BeautifulSoup(r.text, 'html.parser')
+    x = SteamStatus.find("span", {"class": "display-name"})
+    print("ten nguoi dung:",x.text)
+    # x = session.cookies.get_dict()
+    # print(x)
+    # k = "wordpress_logged_in"
+    # for i in x.keys():
+    #     if i.find(k) >= 0:
+    #         y = x[i].split("%")[0]
+    # print(y)
 #
 def bySelenium():
     chorme = "C:\\extChrome\\chromedriver.exe"
