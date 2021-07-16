@@ -13,9 +13,13 @@ def byRequest():
         }
     #r = requests.post(url,data = payload)
     r = session.post('http://45.79.43.178/source_carts/wordpress/wp-login.php', data=payload)
-    print(r.text)
+    #print(r.text)
     x = session.cookies.get_dict()
-    y = x['wordpress_logged_in_9b3f1ac684a4401c524e27c6c40e95d5'].split("%")[0]
+    print(x)
+    k = "wordpress_logged_in"
+    for i in x.keys():
+        if i.find(k) >= 0:
+            y = x[i].split("%")[0]
     print(y)
 #
 def bySelenium():
@@ -30,5 +34,5 @@ def bySelenium():
     driver.find_element_by_id("wp-submit").submit()
     name = driver.find_element_by_class_name('display-name')
     print(name.text)
-bySelenium()
-#byRequest()
+#bySelenium()
+byRequest()
